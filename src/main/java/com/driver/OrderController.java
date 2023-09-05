@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
 
-    @PostMapping("/add-order")
+    @PostMapping("/addorder")
     public ResponseEntity<String> addOrder(@RequestBody Order order){
 
         return new ResponseEntity<>("New order added successfully", HttpStatus.CREATED);
@@ -32,14 +32,14 @@ public class OrderController {
         return new ResponseEntity<>("New delivery partner added successfully", HttpStatus.CREATED);
     }
 
-    @PutMapping("/add-order-partner-pair")
+    @PutMapping("/add-ordr-partner-pair")
     public ResponseEntity<String> addOrderPartnerPair(@RequestParam String orderId, @RequestParam String partnerId){
 
         //This is basically assigning that order to that partnerId
         return new ResponseEntity<>("New order-partner pair added successfully", HttpStatus.CREATED);
     }
 
-    @GetMapping("/get-order-by-id/{orderId}")
+    @GetMapping("/get-order-by/{orderId}")
     public ResponseEntity<Order> getOrderById(@PathVariable String orderId){
 
         Order order= null;
@@ -48,7 +48,7 @@ public class OrderController {
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
 
-    @GetMapping("/get-partner-by-id/{partnerId}")
+    @GetMapping("/get-partner-by-/{partnerId}")
     public ResponseEntity<DeliveryPartner> getPartnerById(@PathVariable String partnerId){
 
         DeliveryPartner deliveryPartner = null;
@@ -58,7 +58,7 @@ public class OrderController {
         return new ResponseEntity<>(deliveryPartner, HttpStatus.CREATED);
     }
 
-    @GetMapping("/get-order-count-by-partner-id/{partnerId}")
+    @GetMapping("/get-orderpartner-id/{partnerId}")
     public ResponseEntity<Integer> getOrderCountByPartnerId(@PathVariable String partnerId){
 
         Integer orderCount = 0;
@@ -77,7 +77,7 @@ public class OrderController {
         return new ResponseEntity<>(orders, HttpStatus.CREATED);
     }
 
-    @GetMapping("/get-all-orders")
+    @GetMapping("/getorders")
     public ResponseEntity<List<String>> getAllOrders(){
         List<String> orders = null;
 
@@ -85,7 +85,7 @@ public class OrderController {
         return new ResponseEntity<>(orders, HttpStatus.CREATED);
     }
 
-    @GetMapping("/get-count-of-unassigned-orders")
+    @GetMapping("/get-countunassigned-orders")
     public ResponseEntity<Integer> getCountOfUnassignedOrders(){
         Integer countOfOrders = 0;
 
@@ -94,7 +94,7 @@ public class OrderController {
         return new ResponseEntity<>(countOfOrders, HttpStatus.CREATED);
     }
 
-    @GetMapping("/get-count-of-orders-left-after-given-time/{partnerId}")
+    @GetMapping("/get-count-of-orders-left-aftergiven-time/{partnerId}")
     public ResponseEntity<Integer> getOrdersLeftAfterGivenTimeByPartnerId(@PathVariable String time, @PathVariable String partnerId){
 
         Integer countOfOrders = 0;
