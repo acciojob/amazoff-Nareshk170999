@@ -1,28 +1,39 @@
 package com.driver;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class OrderService {
-
+    @Autowired
     OrderRepository orderRepository;
+
     public void addOrderService(Order order){
         orderRepository.addOrder(order);
     }
+
     public void addDeliveryPartnerService(String partnerId){
         orderRepository.addDeliveryPartner(partnerId);
     }
-    public void addOrderPartnerPaidService(String partnerId, String orderId){
-        orderRepository.addOrderPartnerPair(partnerId,orderId);
+
+    public void addOrderPartnerPairService(String partnerId  , String orderId){
+        orderRepository.addOrderPartnerPair(partnerId , orderId);
     }
+
     public Order getOrderByOrderIdService(String orderId){
         return orderRepository.getOrderByOrderId(orderId);
     }
-    public DeliveryPartner getPartnerByPartneridService(String partnerId){
+
+    public DeliveryPartner getPartnerByPartnerIdService(String partnerId){
         return orderRepository.getPartnerByPartnerId(partnerId);
     }
+
     public int getNumberOfOrdersAssignedService(String partnerId){
         return orderRepository.getNumberOfOrdersAssigned(partnerId);
     }
+
     public List<String> getAllTheOrderService(String partnerId){
         return orderRepository.getAllTheOrdersOfAPartner(partnerId);
     }

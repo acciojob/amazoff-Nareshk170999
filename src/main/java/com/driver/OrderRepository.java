@@ -1,46 +1,52 @@
 package com.driver;
 
-import io.swagger.models.auth.In;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class OrderRepository {
     private Map<String , Order> orderHashMap;
-    private Map<String ,Integer>deliveryPartnerHashMap;
+    private Map<String , Integer> deliveryPartnerHashMap;
     private Map<String , List<String>> partnerOrderMap;
 
-    private Map<String, Integer> orderTimeMap;
+    private Map<String , Integer> orderTimeMap;
 
     OrderRepository(){
         this.orderHashMap = new HashMap<>();
         this.deliveryPartnerHashMap = new HashMap<>();
-        this.partnerOrderMap = new HashMap<String, List<String>>();
+        this.partnerOrderMap = new HashMap<>();
         this.orderTimeMap = new HashMap<>();
     }
+
     public void addOrder(Order order){
-        orderHashMap.put(order.getId(), order);
+        orderHashMap.put(order.getId() , order);
     }
+
     public void addDeliveryPartner(String partnerId){
-        deliveryPartnerHashMap.put(partnerId,deliveryPartnerHashMap.getOrDefault(partnerId,0)+1);
+        deliveryPartnerHashMap.put(partnerId , deliveryPartnerHashMap.getOrDefault(partnerId , 0)+1);
     }
-    public void addOrderPartnerPair(String partnerId, String orderId){
+
+    public void addOrderPartnerPair(String partnerId , String orderId){
         List<String> temp = partnerOrderMap.get(partnerId);
-        if (temp == null){
+        if(temp==null){
             temp = new ArrayList<>();
             temp.add(orderId);
-            partnerOrderMap.put(partnerId,temp);
-        }else{
+            partnerOrderMap.put(partnerId , temp);
+        }
+        else {
             temp.add(orderId);
         }
     }
+
     public Order getOrderByOrderId(String orderId){
-        if(orderHashMap.containsKey(orderId))
-            return orderHashMap.get(orderId);
-        return new Order("Not Exist", "Not Exist");
+        if(orderHashMap.containsKey(orderId)) return orderHashMap.get(orderId);
+        return new Order("Not Exist" , "Not Exist");
     }
+
     public DeliveryPartner getPartnerByPartnerId(String partnerId){
         if(partnerOrderMap.containsKey(partnerId)){
             DeliveryPartner deliveryPartner = new DeliveryPartner(partnerId);
@@ -116,4 +122,5 @@ public class OrderRepository {
             }
         }
     }
+
 }
